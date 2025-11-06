@@ -1,0 +1,83 @@
+{
+  "name": "primadata-marketplace",
+  "owner": {
+    "name": "Rick van Beek",
+    "email": "rick@primadetaautomation.com"
+  },
+  "metadata": {
+    "description": "Complete development marketplace: claude-dev-toolkit (38 agents + 6 skills) + superpowers ecosystem",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "claude-dev-toolkit",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/Primadetaautomation/claude-dev-toolkit.git"
+      },
+      "description": "Complete development toolkit: 38 specialized agents, 6 core skills, defensive programming patterns, Playwright optimization, and comprehensive automation scripts",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "superpowers",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/obra/superpowers.git"
+      },
+      "description": "Core skills library: TDD, debugging, collaboration patterns, and proven techniques",
+      "version": "3.4.1",
+      "strict": true
+    },
+    {
+      "name": "superpowers-chrome",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/obra/superpowers-chrome.git"
+      },
+      "description": "Direct Chrome DevTools Protocol access via 'browsing' skill. Zero dependencies, auto-starts Chrome.",
+      "version": "1.5.0",
+      "strict": true
+    },
+    {
+      "name": "elements-of-style",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/obra/the-elements-of-style.git"
+      },
+      "description": "Writing guidance based on William Strunk Jr.'s The Elements of Style - clear, concise, grammatically correct writing",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "episodic-memory",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/obra/episodic-memory.git"
+      },
+      "description": "Semantic search for Claude Code conversations. Remember past discussions, decisions, and patterns across sessions.",
+      "version": "1.0.9",
+      "strict": true
+    },
+    {
+      "name": "superpowers-lab",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/obra/superpowers-lab.git"
+      },
+      "description": "Experimental skills: Control interactive CLI tools (vim, menuconfig, REPLs, git rebase -i) through tmux automation",
+      "version": "0.1.0",
+      "strict": true
+    },
+    {
+      "name": "superpowers-developing-for-claude-code",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/obra/superpowers-developing-for-claude-code.git"
+      },
+      "description": "Skills and resources for developing Claude Code plugins, skills, MCP servers, and extensions with official documentation.",
+      "version": "0.2.0",
+      "strict": true
+    }
+  ]
+}
