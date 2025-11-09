@@ -5,8 +5,8 @@
     "email": "rick@primadetaautomation.com"
   },
   "metadata": {
-    "description": "Complete development marketplace: claude-dev-toolkit (38 agents + 6 skills) + superpowers ecosystem",
-    "version": "1.0.0"
+    "description": "Complete development marketplace: 38+ agents, 32+ skills, MCP servers, browser automation, and professional tools",
+    "version": "1.5.0"
   },
   "plugins": [
     {
@@ -77,6 +77,66 @@
       },
       "description": "Skills and resources for developing Claude Code plugins, skills, MCP servers, and extensions with official documentation.",
       "version": "0.2.0",
+      "strict": true
+    },
+    {
+      "name": "primadata-enhanced-toolkit",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/Primadetaautomation/primadata-enhanced-toolkit.git"
+      },
+      "description": "All-in-one bundle: Memory bank, cost tracking, security tools, prompt engineering, doc automation, and specialized agents. Complete my-claude-code-setup features. Based on centminmod/my-claude-code-setup.",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "claude-mcp-cloudflare-docs",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/cloudflare/mcp-server-cloudflare.git"
+      },
+      "description": "MCP server for Cloudflare documentation with vectorized search. Access Cloudflare docs directly from Claude Code.",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "claude-mcp-notion",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/makenotion/notion-mcp-server.git"
+      },
+      "description": "MCP server for Notion integration. Access and update Notion databases, pages, and documents directly from Claude Code.",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "claude-mcp-gemini",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/centminmod/gemini-cli-mcp-server.git"
+      },
+      "description": "MCP server for Gemini CLI integration. Access Google's Gemini models for alternative LLM capabilities.",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "claude-mcp-context7",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/upstash/context7.git"
+      },
+      "description": "MCP server for Context7 integration. Provides external semantic context and vector storage for enhanced memory.",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "claude-code-metrics",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/centminmod/claude-code-opentelemetry-setup.git"
+      },
+      "description": "OpenTelemetry integration for Claude Code usage metrics. Track performance, errors, and usage patterns with observability.",
+      "version": "1.0.0",
       "strict": true
     }
   ]

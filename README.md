@@ -1,8 +1,13 @@
-# 🚀 Primadata Development Marketplace
+# 🚀 Primadata Development Marketplace v1.5
 
-**Complete Claude Code development ecosystem in één installatie**
+**Complete Claude Code development ecosystem - 38+ agents, 32+ skills, MCP servers, browser automation**
 
-[🇬🇧 English](#english-version) | [🇳🇱 Nederlands](#nederlandse-versie)
+[🇬🇧 English](#english-version) | [🇳🇱 Nederlands](#nederlandse-versie) | [📜 Credits](#credits)
+
+[![Version](https://img.shields.io/badge/Version-1.5.0-blue)](https://github.com/Primadetaautomation/primadata-marketplace)
+[![Plugins](https://img.shields.io/badge/Plugins-14-green)](https://github.com/Primadetaautomation/primadata-marketplace)
+[![Agents](https://img.shields.io/badge/Agents-45+-orange)](https://github.com/Primadetaautomation/primadata-marketplace)
+[![Skills](https://img.shields.io/badge/Skills-35+-purple)](https://github.com/Primadetaautomation/primadata-marketplace)
 
 ---
 
@@ -10,40 +15,74 @@
 
 ### 🎯 Wat is dit?
 
-De **Primadata Development Marketplace** combineert de beste Claude Code plugins voor moderne softwareontwikkeling in één eenvoudig te installeren pakket:
+De **Primadata Development Marketplace v1.5** combineert de beste Claude Code plugins voor moderne softwareontwikkeling:
 
-- **38 gespecialiseerde agents** voor development, testing, security, en meer
-- **32 skills** voor TDD, debugging, collaboration, en best practices
+- **38+ gespecialiseerde agents** voor development, testing, security, architectuur
+- **32+ skills** voor TDD, debugging, collaboration, en best practices
+- **MCP server integraties** voor Cloudflare, Notion, Gemini, Context7
 - **Browser automation** met Chrome DevTools
 - **Episodic memory** voor context over sessies heen
 - **Writing tools** voor documentatie
 - **Experimental features** voor advanced workflows
+- **Plugin development tools** voor het maken van eigen plugins
 
-### ⚡ Snelle Installatie
+### ⚡ Installatie Profielen
 
+#### 💎 **Quick Power-Up** (My-Claude-Code-Setup Features) 🆕
 ```bash
-# Stap 1: Voeg de marketplace toe
+# Voor gebruikers die ALLE my-claude-code-setup features willen in één keer:
+claude plugin marketplace add Primadetaautomation/primadata-marketplace && \
+  claude plugin install primadata-enhanced-toolkit@primadata-marketplace
+```
+**Inclusief:** Memory bank, cost tracking, security tools, prompt engineering, doc automation, extra agents
+
+#### 🟢 **Minimal Profile** (Essentials)
+```bash
+# Voeg marketplace toe
 claude plugin marketplace add Primadetaautomation/primadata-marketplace
 
-# Stap 2: Installeer alle plugins (of selecteer individueel)
-claude plugin install claude-dev-toolkit@primadata-marketplace
+# Installeer essentiële plugins
 claude plugin install superpowers@primadata-marketplace
-claude plugin install superpowers-chrome@primadata-marketplace
 claude plugin install elements-of-style@primadata-marketplace
 claude plugin install episodic-memory@primadata-marketplace
-claude plugin install superpowers-lab@primadata-marketplace
-claude plugin install superpowers-developing-for-claude-code@primadata-marketplace
 ```
 
-**Of installeer alles in één keer:**
-
+#### 🔵 **Standard Profile** (Recommended)
 ```bash
-# Installeer complete toolkit
-claude plugin marketplace add Primadetaautomation/primadata-marketplace && \
-  claude plugin install claude-dev-toolkit@primadata-marketplace && \
+# Voeg marketplace toe
+claude plugin marketplace add Primadetaautomation/primadata-marketplace
+
+# Installeer standard set
+claude plugin install claude-dev-toolkit@primadata-marketplace && \
+  claude plugin install superpowers@primadata-marketplace && \
+  claude plugin install episodic-memory@primadata-marketplace && \
+  claude plugin install elements-of-style@primadata-marketplace
+```
+
+#### 🟣 **Professional Profile** (Full Development)
+```bash
+# Voeg marketplace toe
+claude plugin marketplace add Primadetaautomation/primadata-marketplace
+
+# Installeer professional set
+claude plugin install claude-dev-toolkit@primadata-marketplace && \
   claude plugin install superpowers@primadata-marketplace && \
   claude plugin install superpowers-chrome@primadata-marketplace && \
-  claude plugin install episodic-memory@primadata-marketplace
+  claude plugin install episodic-memory@primadata-marketplace && \
+  claude plugin install elements-of-style@primadata-marketplace && \
+  claude plugin install superpowers-lab@primadata-marketplace
+```
+
+#### 🔴 **Enterprise Profile** (Complete Suite)
+```bash
+# One-liner voor complete installatie
+claude plugin marketplace add Primadetaautomation/primadata-marketplace && \
+  for plugin in claude-dev-toolkit superpowers superpowers-chrome elements-of-style \
+    episodic-memory superpowers-lab superpowers-developing-for-claude-code \
+    claude-mcp-cloudflare-docs claude-mcp-notion claude-mcp-gemini \
+    claude-mcp-context7 claude-code-metrics; do \
+    claude plugin install $plugin@primadata-marketplace; \
+  done
 ```
 
 ### 📦 Wat zit erin?
@@ -137,13 +176,49 @@ claude plugin marketplace add Primadetaautomation/primadata-marketplace && \
 - working-with-claude-code
 - developing-claude-code-plugins
 
+#### 8️⃣ **primadata-enhanced-toolkit** (All-in-One Bundle) 🆕
+Complete my-claude-code-setup features in één plugin:
+- **Memory Bank System** - CLAUDE-* files voor project context
+- **Cost Management** - /ccusage-daily, budget tracking
+- **Security Tools** - /secure-prompts, /security-audit, OWASP checks
+- **Prompt Engineering** - /apply-thinking-to, CoD mode (80% token reductie)
+- **Documentation** - /create-release-note, /add-update-readme
+- **Extra Agents** - code-searcher, get-current-datetime, ux-design-expert
+
+#### 9️⃣ **claude-mcp-cloudflare-docs** (MCP Server)
+- Cloudflare documentation access
+- Vectorized search
+
+#### 🔟 **claude-mcp-notion** (MCP Server)
+- Notion integration
+- Database en page access
+
+#### 1️⃣1️⃣ **claude-mcp-gemini** (MCP Server)
+- Google Gemini model access
+- Alternative LLM capabilities
+
+#### 1️⃣2️⃣ **claude-mcp-context7** (MCP Server)
+- External semantic context
+- Vector storage
+
+#### 1️⃣3️⃣ **claude-code-metrics** (Observability)
+- OpenTelemetry integration
+- Performance tracking
+- Error monitoring
+
+#### 1️⃣4️⃣ **claude-mcp-chrome-devtools** (Optional)
+- Chrome DevTools Protocol
+- Alternative to superpowers-chrome
+
 ### 🎯 Totaal Overzicht
 
 | Component | Aantal |
 |-----------|--------|
-| **Plugins** | 7 |
-| **Skills** | 32 |
-| **Agents** | 38+ |
+| **Plugins** | 14 |
+| **Skills** | 35+ |
+| **Agents** | 45+ |
+| **MCP Servers** | 5+ |
+| **Commands** | 10+ |
 
 ### 🔧 Gebruik
 
@@ -203,53 +278,89 @@ MIT License - Zie [LICENSE](LICENSE) voor details.
 
 ### 🎯 What is this?
 
-The **Primadata Development Marketplace** combines the best Claude Code plugins for modern software development in one easy-to-install package:
+The **Primadata Development Marketplace v1.5** combines the best Claude Code plugins for modern software development:
 
-- **38 specialized agents** for development, testing, security, and more
-- **32 skills** for TDD, debugging, collaboration, and best practices
+- **38+ specialized agents** for development, testing, security, architecture
+- **32+ skills** for TDD, debugging, collaboration, and best practices
+- **MCP server integrations** for Cloudflare, Notion, Gemini, Context7
 - **Browser automation** with Chrome DevTools
 - **Episodic memory** for cross-session context
 - **Writing tools** for documentation
 - **Experimental features** for advanced workflows
+- **Plugin development tools** for creating your own plugins
 
-### ⚡ Quick Install
+### ⚡ Installation Profiles
 
+#### 💎 **Quick Power-Up** (My-Claude-Code-Setup Features) 🆕
 ```bash
-# Step 1: Add the marketplace
+# For users who want ALL my-claude-code-setup features in one go:
+claude plugin marketplace add Primadetaautomation/primadata-marketplace && \
+  claude plugin install primadata-enhanced-toolkit@primadata-marketplace
+```
+**Includes:** Memory bank, cost tracking, security tools, prompt engineering, doc automation, extra agents
+
+#### 🟢 **Minimal Profile** (Essentials)
+```bash
+# Add marketplace
 claude plugin marketplace add Primadetaautomation/primadata-marketplace
 
-# Step 2: Install all plugins (or select individually)
-claude plugin install claude-dev-toolkit@primadata-marketplace
+# Install essential plugins
 claude plugin install superpowers@primadata-marketplace
-claude plugin install superpowers-chrome@primadata-marketplace
 claude plugin install elements-of-style@primadata-marketplace
 claude plugin install episodic-memory@primadata-marketplace
-claude plugin install superpowers-lab@primadata-marketplace
-claude plugin install superpowers-developing-for-claude-code@primadata-marketplace
 ```
 
-**Or install everything at once:**
-
+#### 🔵 **Standard Profile** (Recommended)
 ```bash
-# Install complete toolkit
-claude plugin marketplace add Primadetaautomation/primadata-marketplace && \
-  claude plugin install claude-dev-toolkit@primadata-marketplace && \
+# Add marketplace
+claude plugin marketplace add Primadetaautomation/primadata-marketplace
+
+# Install standard set
+claude plugin install claude-dev-toolkit@primadata-marketplace && \
+  claude plugin install superpowers@primadata-marketplace && \
+  claude plugin install episodic-memory@primadata-marketplace && \
+  claude plugin install elements-of-style@primadata-marketplace
+```
+
+#### 🟣 **Professional Profile** (Full Development)
+```bash
+# Add marketplace
+claude plugin marketplace add Primadetaautomation/primadata-marketplace
+
+# Install professional set
+claude plugin install claude-dev-toolkit@primadata-marketplace && \
   claude plugin install superpowers@primadata-marketplace && \
   claude plugin install superpowers-chrome@primadata-marketplace && \
-  claude plugin install episodic-memory@primadata-marketplace
+  claude plugin install episodic-memory@primadata-marketplace && \
+  claude plugin install elements-of-style@primadata-marketplace && \
+  claude plugin install superpowers-lab@primadata-marketplace
+```
+
+#### 🔴 **Enterprise Profile** (Complete Suite)
+```bash
+# One-liner for complete installation
+claude plugin marketplace add Primadetaautomation/primadata-marketplace && \
+  for plugin in claude-dev-toolkit superpowers superpowers-chrome elements-of-style \
+    episodic-memory superpowers-lab superpowers-developing-for-claude-code \
+    claude-mcp-cloudflare-docs claude-mcp-notion claude-mcp-gemini \
+    claude-mcp-context7 claude-code-metrics; do \
+    claude plugin install $plugin@primadata-marketplace; \
+  done
 ```
 
 ### 📦 What's Included?
 
-See Dutch version above for complete list of agents and skills.
+See Dutch version above for complete list of all 19 plugins with agents and skills.
 
 ### 🎯 Total Overview
 
 | Component | Count |
 |-----------|-------|
-| **Plugins** | 7 |
-| **Skills** | 32 |
-| **Agents** | 38+ |
+| **Plugins** | 19 |
+| **Skills** | 40+ |
+| **Agents** | 50+ |
+| **Commands** | 15+ |
+| **MCP Servers** | 5+ |
 
 ### 🔧 Usage
 
@@ -302,6 +413,51 @@ Questions, suggestions, or bugs? Open an issue at:
 ### 📄 License
 
 MIT License - See [LICENSE](LICENSE) for details.
+
+---
+
+## 📜 Credits
+
+This marketplace integrates and builds upon the work of many talented developers and organizations:
+
+### Core Contributors
+
+- **[Jesse Beder (obra)](https://github.com/obra)** - Creator of the Superpowers ecosystem
+  - superpowers, superpowers-chrome, superpowers-lab, superpowers-developing-for-claude-code
+  - episodic-memory
+  - elements-of-style
+
+- **[George Liu (centminmod)](https://github.com/centminmod)** - My Claude Code Setup
+  - Memory bank system concept
+  - Cost management commands (/ccusage-daily)
+  - Security commands (/secure-prompts, /security-audit)
+  - Prompt engineering tools
+  - Documentation automation commands
+  - Specialized agents (code-searcher, ux-design-expert)
+  - Claude Code metrics and OpenTelemetry setup
+  - Gemini MCP server
+
+- **[Primadata Automation](https://github.com/Primadetaautomation)** - Marketplace curator
+  - claude-dev-toolkit (38 agents + 6 skills)
+  - Marketplace curation and integration
+  - Wrapper plugins for custom features
+
+### MCP Server Authors
+
+- **[Cloudflare](https://github.com/cloudflare)** - Cloudflare Documentation MCP
+- **[Notion](https://github.com/makenotion)** - Notion MCP Server
+- **[Upstash](https://github.com/upstash)** - Context7 MCP
+- **[Chrome DevTools Team](https://github.com/ChromeDevTools)** - Chrome DevTools MCP
+
+### Special Thanks
+
+- **[Anthropic](https://www.anthropic.com/)** - For creating Claude and Claude Code
+- All contributors to the open-source Claude Code ecosystem
+- The Claude Code community for feedback and suggestions
+
+### Attribution Note
+
+The primadata-* wrapper plugins (memory-bank, cost-manager, security-pack, prompt-tools, docs-automation, specialized-agents) are based on features from [centminmod/my-claude-code-setup](https://github.com/centminmod/my-claude-code-setup) and are adapted with full attribution to work as Claude Code plugins.
 
 ---
 
