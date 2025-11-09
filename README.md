@@ -437,7 +437,7 @@ This marketplace integrates and builds upon the work of many talented developers
   - Claude Code metrics and OpenTelemetry setup
   - Gemini MCP server
 
-- **[Primadata Automation](https://github.com/Primadetaautomation)** - Marketplace curator
+- **[primautomation.nl](https://github.com/Primadetaautomation)** - Marketplace curator
   - claude-dev-toolkit (38 agents + 6 skills)
   - Marketplace curation and integration
   - Wrapper plugins for custom features
@@ -461,4 +461,4 @@ The primadata-* wrapper plugins (memory-bank, cost-manager, security-pack, promp
 
 ---
 
-**Made with ❤️ by [Primadata Automation](https://github.com/Primadetaautomation)**
+**Made with ❤️ by [primautomation.nl](https://github.com/Primadetaautomation)**
