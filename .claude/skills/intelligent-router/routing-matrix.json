@@ -1,0 +1,259 @@
+{
+  "version": "1.0.0",
+  "description": "Intent-based routing matrix for intelligent agent/skill/plugin dispatch",
+  "routes": {
+    "code_search": {
+      "intent": "Finding code, analyzing codebase, locating implementations",
+      "triggers": ["waar wordt", "zoek code", "find", "locate", "hoe werkt", "implementatie van"],
+      "complexity": "simple",
+      "plugins": ["primadata-enhanced-toolkit"],
+      "agent": "code-searcher",
+      "skills": [],
+      "tools": ["Grep", "Read", "Glob"],
+      "docs": [],
+      "priority": "high"
+    },
+    "browser_automation": {
+      "intent": "Browser testing, web scraping, UI automation",
+      "triggers": ["test website", "scrape", "browser", "screenshot", "navigate", "click"],
+      "complexity": "medium",
+      "plugins": ["superpowers-chrome", "chrome-devtools"],
+      "agent": "playwright-test-agent",
+      "skills": ["superpowers-chrome:browsing"],
+      "tools": ["mcp__chrome-devtools", "mcp__plugin_superpowers-chrome"],
+      "docs": [],
+      "priority": "medium"
+    },
+    "memory_recall": {
+      "intent": "Retrieving past decisions, solutions, context",
+      "triggers": ["wat hebben we", "eerder", "vorige keer", "herinner", "previous", "history"],
+      "complexity": "simple",
+      "plugins": ["episodic-memory"],
+      "agent": null,
+      "skills": ["episodic-memory:remembering-conversations"],
+      "tools": ["mcp__plugin_episodic-memory_episodic-memory__search"],
+      "docs": [],
+      "priority": "critical",
+      "notes": "ALWAYS run at start of non-trivial tasks"
+    },
+    "ux_design": {
+      "intent": "UI/UX design, premium interfaces, dashboards",
+      "triggers": ["design", "dashboard", "charts", "premium", "tailwind", "figma", "UI", "UX"],
+      "complexity": "medium",
+      "plugins": ["primadata-enhanced-toolkit"],
+      "agent": "ux-design-expert",
+      "skills": [],
+      "tools": ["Read", "Write", "WebFetch"],
+      "docs": ["docs/frontend.md"],
+      "priority": "medium"
+    },
+    "security_review": {
+      "intent": "Security audit, OWASP compliance, vulnerability scanning",
+      "triggers": ["security", "beveilig", "OWASP", "vulnerability", "audit", "XSS", "CSRF", "injection"],
+      "complexity": "high",
+      "plugins": [],
+      "agent": "security-specialist",
+      "skills": ["security-essentials"],
+      "tools": ["Grep", "Bash"],
+      "docs": ["docs/security.md"],
+      "priority": "critical"
+    },
+    "testing_unit": {
+      "intent": "Unit/integration testing, TDD, test coverage",
+      "triggers": ["test", "TDD", "coverage", "unit test", "integration test"],
+      "complexity": "medium",
+      "plugins": [],
+      "agent": "qa-testing-engineer",
+      "skills": ["testing-fundamentals", "superpowers:test-driven-development"],
+      "tools": ["Bash", "Read", "Write"],
+      "docs": ["docs/testing.md"],
+      "priority": "high"
+    },
+    "testing_e2e": {
+      "intent": "End-to-end browser testing, accessibility testing",
+      "triggers": ["e2e", "end-to-end", "browser test", "playwright", "accessibility"],
+      "complexity": "high",
+      "plugins": [],
+      "agent": "playwright-test-agent",
+      "skills": ["testing-fundamentals"],
+      "tools": ["Bash", "mcp__chrome-devtools"],
+      "docs": ["docs/testing.md"],
+      "priority": "medium"
+    },
+    "architecture": {
+      "intent": "System design, tech stack decisions, scalability",
+      "triggers": ["ontwerp", "architectuur", "tech stack", "schaalbaar", "design system", "microservices"],
+      "complexity": "high",
+      "plugins": [],
+      "agent": "solutions-architect",
+      "skills": ["superpowers:brainstorming"],
+      "tools": ["WebSearch", "Read"],
+      "docs": ["docs/backend.md", "docs/infrastructure.md"],
+      "priority": "high",
+      "notes": "Always start with brainstorming skill"
+    },
+    "backend_api": {
+      "intent": "API development, REST/GraphQL, endpoints",
+      "triggers": ["api", "endpoint", "REST", "GraphQL", "backend", "server"],
+      "complexity": "medium",
+      "plugins": [],
+      "agent": "backend-specialist",
+      "skills": ["backend-development-patterns", "testing-fundamentals"],
+      "tools": ["Read", "Write", "Edit", "Bash"],
+      "docs": ["docs/backend.md"],
+      "priority": "high"
+    },
+    "backend_database": {
+      "intent": "Database design, queries, optimization",
+      "triggers": ["database", "SQL", "query", "schema", "migration", "PostgreSQL", "Supabase"],
+      "complexity": "medium",
+      "plugins": [],
+      "agent": "data-engineer",
+      "skills": ["backend-development-patterns"],
+      "tools": ["sql-universal-expert", "Bash", "Read"],
+      "docs": ["docs/backend.md"],
+      "priority": "high"
+    },
+    "frontend_ui": {
+      "intent": "Frontend development, React, components, UI",
+      "triggers": ["component", "React", "Vue", "frontend", "UI", "form", "button", "pagina"],
+      "complexity": "medium",
+      "plugins": [],
+      "agent": "frontend-specialist",
+      "skills": ["testing-fundamentals"],
+      "tools": ["Read", "Write", "Edit"],
+      "docs": ["docs/frontend.md"],
+      "priority": "high"
+    },
+    "authentication": {
+      "intent": "User auth, login, registration, sessions",
+      "triggers": ["login", "auth", "register", "inlog", "gebruiker", "wachtwoord", "session"],
+      "complexity": "high",
+      "plugins": [],
+      "agent": "backend-specialist",
+      "skills": ["security-essentials", "backend-development-patterns"],
+      "tools": ["Read", "Write", "Edit"],
+      "docs": ["docs/security.md", "docs/backend.md"],
+      "priority": "critical",
+      "optional_agents": ["security-specialist", "frontend-specialist"]
+    },
+    "deployment": {
+      "intent": "Deploy to production, CI/CD, hosting",
+      "triggers": ["deploy", "live", "production", "CI/CD", "hosting", "Railway", "Vercel"],
+      "complexity": "high",
+      "plugins": ["railway-mcp-server"],
+      "agent": null,
+      "skills": ["deployment-workflows"],
+      "tools": ["Bash", "mcp__railway-mcp-server"],
+      "docs": ["docs/infrastructure.md"],
+      "priority": "high"
+    },
+    "debugging": {
+      "intent": "Bug fixing, error resolution, troubleshooting",
+      "triggers": ["bug", "error", "fout", "crash", "fix", "werkt niet", "probleem"],
+      "complexity": "variable",
+      "plugins": [],
+      "agent": "senior-fullstack-developer",
+      "skills": ["superpowers:systematic-debugging", "superpowers:root-cause-tracing"],
+      "tools": ["Read", "Grep", "Bash"],
+      "docs": [],
+      "priority": "high",
+      "notes": "Use systematic-debugging skill framework"
+    },
+    "git_operations": {
+      "intent": "Git workflows, branching, worktrees",
+      "triggers": ["git", "branch", "worktree", "commit", "merge"],
+      "complexity": "simple",
+      "plugins": [],
+      "agent": null,
+      "skills": ["superpowers:using-git-worktrees"],
+      "tools": ["Bash"],
+      "docs": [],
+      "priority": "medium"
+    },
+    "data_engineering": {
+      "intent": "ETL pipelines, data warehouse, data quality",
+      "triggers": ["ETL", "pipeline", "data warehouse", "data quality", "streaming"],
+      "complexity": "high",
+      "plugins": [],
+      "agent": "data-engineer",
+      "skills": [],
+      "tools": ["sql-universal-expert", "Bash", "Read"],
+      "docs": ["docs/backend.md"],
+      "priority": "medium"
+    },
+    "ai_ml_integration": {
+      "intent": "LLM integration, RAG, vector databases",
+      "triggers": ["RAG", "OpenAI", "LLM", "vector", "embedding", "AI", "ML"],
+      "complexity": "high",
+      "plugins": [],
+      "agent": "ml-ai-integration",
+      "skills": [],
+      "tools": ["WebFetch", "Bash", "Read", "Write"],
+      "docs": [],
+      "priority": "medium"
+    },
+    "documentation": {
+      "intent": "Writing docs, README, comments",
+      "triggers": ["docs", "documentation", "README", "comment", "explain"],
+      "complexity": "simple",
+      "plugins": [],
+      "agent": null,
+      "skills": ["elements-of-style:writing-clearly-and-concisely"],
+      "tools": ["Write", "Edit", "Read"],
+      "docs": [],
+      "priority": "low"
+    },
+    "accessibility": {
+      "intent": "WCAG compliance, inclusive design, screen readers",
+      "triggers": ["accessibility", "WCAG", "a11y", "screen reader", "aria"],
+      "complexity": "medium",
+      "plugins": [],
+      "agent": "accessibility-specialist",
+      "skills": [],
+      "tools": ["Read", "Edit", "Bash"],
+      "docs": [],
+      "priority": "medium"
+    },
+    "complex_feature": {
+      "intent": "Multi-domain features requiring coordination",
+      "triggers": ["volledige", "complete", "nieuwe feature", "module", "systeem"],
+      "complexity": "complex",
+      "plugins": [],
+      "agent": "master-orchestrator",
+      "skills": ["superpowers:brainstorming", "superpowers:writing-plans"],
+      "tools": ["Task"],
+      "docs": [],
+      "priority": "critical",
+      "notes": "Dispatches multiple sub-agents in parallel"
+    }
+  },
+  "complexity_thresholds": {
+    "simple": {
+      "max_words": 10,
+      "max_domains": 1,
+      "auto_dispatch": true
+    },
+    "medium": {
+      "max_words": 30,
+      "max_domains": 2,
+      "auto_dispatch": true
+    },
+    "high": {
+      "max_words": 50,
+      "max_domains": 3,
+      "auto_dispatch": true
+    },
+    "complex": {
+      "min_domains": 3,
+      "auto_dispatch": false,
+      "requires_confirmation": true
+    }
+  },
+  "auto_detect_config": {
+    "min_word_count": 4,
+    "action_verbs": ["maak", "bouw", "fix", "deploy", "test", "create", "build", "implement", "add", "update", "optimaliseer", "optimize", "verbeter", "improve", "zoek", "find", "search", "verwijder", "delete", "remove", "refactor", "schrijf", "write", "lees", "read", "installeer", "install", "configureer", "configure", "setup", "review", "check", "valideer", "validate"],
+    "skip_keywords": ["wat is", "hoe werkt", "uitleg", "explain", "what is", "how does", "wie is", "who is", "wanneer", "when"],
+    "always_check_memory": true
+  }
+}
