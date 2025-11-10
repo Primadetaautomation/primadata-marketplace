@@ -19,7 +19,7 @@
       "complexity": "medium",
       "plugins": ["superpowers-chrome", "chrome-devtools"],
       "agent": "playwright-test-agent",
-      "skills": ["superpowers-chrome:browsing"],
+      "skills": ["superpowers-chrome:browsing", "webapp-testing"],
       "tools": ["mcp__chrome-devtools", "mcp__plugin_superpowers-chrome"],
       "docs": [],
       "priority": "medium"
@@ -75,7 +75,7 @@
       "complexity": "high",
       "plugins": [],
       "agent": "playwright-test-agent",
-      "skills": ["testing-fundamentals"],
+      "skills": ["testing-fundamentals", "webapp-testing"],
       "tools": ["Bash", "mcp__chrome-devtools"],
       "docs": ["docs/testing.md"],
       "priority": "medium"
@@ -226,6 +226,66 @@
       "docs": [],
       "priority": "critical",
       "notes": "Dispatches multiple sub-agents in parallel"
+    },
+    "skill_creation": {
+      "intent": "Creating custom Claude skills, skill packages",
+      "triggers": ["create skill", "maak skill", "nieuwe skill", "skill maken", "package skill", "skill template"],
+      "complexity": "medium",
+      "plugins": [],
+      "agent": null,
+      "skills": ["skill-creator", "template-skill"],
+      "tools": ["Write", "Bash", "Read"],
+      "docs": [],
+      "priority": "high",
+      "notes": "Uses skill-creator workflow with template-skill as starting point"
+    },
+    "mcp_development": {
+      "intent": "Building MCP servers, plugin development, tool integration",
+      "triggers": ["MCP", "MCP server", "plugin", "model context protocol", "tool integration", "FastMCP"],
+      "complexity": "high",
+      "plugins": [],
+      "agent": "backend-specialist",
+      "skills": ["mcp-builder", "testing-fundamentals"],
+      "tools": ["Write", "Bash", "Read", "WebFetch"],
+      "docs": ["docs/backend.md"],
+      "priority": "high",
+      "notes": "Follow MCP best practices for Python/TypeScript"
+    },
+    "webapp_testing_playwright": {
+      "intent": "Playwright-based web application testing, local server testing",
+      "triggers": ["playwright", "webapp test", "local server", "frontend test", "automation script"],
+      "complexity": "medium",
+      "plugins": [],
+      "agent": "playwright-test-agent",
+      "skills": ["webapp-testing", "testing-fundamentals"],
+      "tools": ["Bash", "Write", "Read"],
+      "docs": ["docs/testing.md"],
+      "priority": "medium",
+      "notes": "Uses with_server.py helper for server lifecycle management"
+    },
+    "document_manipulation": {
+      "intent": "Creating/editing documents (PDF, Word, Excel, PowerPoint)",
+      "triggers": ["PDF", "Word", "Excel", "PowerPoint", "docx", "xlsx", "pptx", "document", "spreadsheet", "presentation"],
+      "complexity": "medium",
+      "plugins": [],
+      "agent": null,
+      "skills": ["document-skills/pdf", "document-skills/docx", "document-skills/xlsx", "document-skills/pptx"],
+      "tools": ["Bash", "Read", "Write"],
+      "docs": [],
+      "priority": "medium",
+      "notes": "Source-available skills from Anthropic"
+    },
+    "artifact_building": {
+      "intent": "Building React/HTML artifacts, interactive UIs",
+      "triggers": ["artifact", "React component", "interactive UI", "claude.ai artifact", "shadcn"],
+      "complexity": "medium",
+      "plugins": [],
+      "agent": "frontend-specialist",
+      "skills": ["artifacts-builder"],
+      "tools": ["Write", "Read"],
+      "docs": ["docs/frontend.md"],
+      "priority": "medium",
+      "notes": "For building claude.ai HTML artifacts with React + Tailwind + shadcn/ui"
     }
   },
   "complexity_thresholds": {

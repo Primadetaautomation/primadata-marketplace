@@ -1,5 +1,128 @@
 # Changelog
 
+## [1.6.0] - 2025-11-10
+
+### Added
+
+#### Official Anthropic Skills Integration (6 new skills)
+- **skill-creator** - Complete guide for creating effective skills
+  - Initialization scripts (`init_skill.py`)
+  - Packaging/validation scripts (`package_skill.py`)
+  - Progressive disclosure patterns
+  - Step-by-step skill creation workflow
+
+- **template-skill** - Basic template for skill development
+  - YAML frontmatter examples
+  - Quick-start for new skills
+  - Proper structure and conventions
+
+- **mcp-builder** - MCP server development guide
+  - Python (FastMCP) implementation guide
+  - TypeScript (MCP SDK) implementation guide
+  - Agent-centric design principles
+  - Comprehensive evaluation framework
+  - Best practices and quality checklists
+
+- **webapp-testing** - Playwright-based testing toolkit
+  - Server lifecycle management (`with_server.py`)
+  - Browser automation patterns
+  - UI verification workflows
+  - Multiple server support
+
+- **document-skills** - Document manipulation suite (4 sub-skills)
+  - `document-skills/pdf` - PDF manipulation and extraction
+  - `document-skills/docx` - Word document creation/editing
+  - `document-skills/xlsx` - Excel spreadsheet handling
+  - `document-skills/pptx` - PowerPoint presentation generation
+
+- **artifacts-builder** - React/HTML artifacts
+  - Tailwind CSS + shadcn/ui integration
+  - Interactive UI components
+  - Claude.ai artifact creation
+
+#### Intelligent Router Enhancements
+- **5 new routing patterns** added to routing-matrix.json:
+  - `skill_creation` - For skill development workflows
+  - `mcp_development` - For MCP server/plugin development
+  - `webapp_testing_playwright` - For Playwright-based testing
+  - `document_manipulation` - For document creation/editing
+  - `artifact_building` - For React/HTML artifact creation
+
+- **Enhanced existing routes:**
+  - `browser_automation` - Now includes webapp-testing skill
+  - `testing_e2e` - Now includes webapp-testing skill
+
+#### Skills Directory Structure
+```
+.claude/skills/
+├── intelligent-router/     (enhanced with new routes)
+├── skill-creator/          (new - Anthropic)
+├── template-skill/         (new - Anthropic)
+├── mcp-builder/           (new - Anthropic)
+├── webapp-testing/        (new - Anthropic)
+├── document-skills/       (new - Anthropic)
+│   ├── pdf/
+│   ├── docx/
+│   ├── xlsx/
+│   └── pptx/
+└── artifacts-builder/     (new - Anthropic)
+```
+
+### Changed
+
+#### README.md
+- Updated version: 1.5 → 1.6
+- Updated skill count: 35+ → 41+
+- Added "Official Anthropic Skills" section (item 15)
+- Added "Intelligent Router" section (item 16)
+- Updated total overview table with built-in skills count
+- Enhanced feature descriptions for both Dutch and English versions
+
+#### routing-matrix.json
+- Added 5 new route definitions
+- Enhanced 2 existing routes with webapp-testing skill
+- Improved trigger keywords for better intent matching
+- Updated route count: 20 → 25+ routes
+
+#### Documentation
+- Added Anthropic attribution in Credits section
+- Updated skill counts in badges
+- Enhanced feature lists with new capabilities
+
+### Testing
+
+All new routing patterns verified:
+- ✅ Skill creation triggers correctly
+- ✅ MCP development dispatches backend-specialist + mcp-builder
+- ✅ Document manipulation loads appropriate document-skills
+- ✅ Artifact building loads artifacts-builder + frontend-specialist
+- ✅ Webapp testing routes properly to playwright-test-agent
+
+### Attribution
+
+New skills properly attributed to:
+- **[Anthropic](https://www.anthropic.com/)** - Official skills from [anthropics/skills](https://github.com/anthropics/skills)
+  - License: Apache 2.0 (open source)
+  - Document skills: Source-available (reference only)
+
+### Statistics
+
+**Before v1.6:**
+- Skills: 35+
+- Built-in: 1 (intelligent-router)
+
+**After v1.6:**
+- Skills: 41+ (+6 Anthropic skills)
+- Built-in: 7 (1 router + 6 Anthropic skills)
+
+### Breaking Changes
+None - all additions are backward compatible.
+
+### Upgrade Path
+No action required - new skills are automatically available in `.claude/skills/` directory.
+
+---
+
 ## [1.5.0] - 2025-11-09
 
 ### Added

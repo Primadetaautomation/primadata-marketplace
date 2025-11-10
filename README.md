@@ -1,13 +1,13 @@
-# 🚀 Primadata Development Marketplace v1.5
+# 🚀 Primadata Development Marketplace v1.6
 
-**Complete Claude Code development ecosystem - 38+ agents, 32+ skills, MCP servers, browser automation**
+**Complete Claude Code development ecosystem - 38+ agents, 41+ skills, MCP servers, browser automation**
 
 [🇬🇧 English](#english-version) | [🇳🇱 Nederlands](#nederlandse-versie) | [📜 Credits](#credits)
 
-[![Version](https://img.shields.io/badge/Version-1.5.0-blue)](https://github.com/Primadetaautomation/primadata-marketplace)
+[![Version](https://img.shields.io/badge/Version-1.6.0-blue)](https://github.com/Primadetaautomation/primadata-marketplace)
 [![Plugins](https://img.shields.io/badge/Plugins-14-green)](https://github.com/Primadetaautomation/primadata-marketplace)
 [![Agents](https://img.shields.io/badge/Agents-45+-orange)](https://github.com/Primadetaautomation/primadata-marketplace)
-[![Skills](https://img.shields.io/badge/Skills-35+-purple)](https://github.com/Primadetaautomation/primadata-marketplace)
+[![Skills](https://img.shields.io/badge/Skills-41+-purple)](https://github.com/Primadetaautomation/primadata-marketplace)
 
 ---
 
@@ -15,10 +15,12 @@
 
 ### 🎯 Wat is dit?
 
-De **Primadata Development Marketplace v1.5** combineert de beste Claude Code plugins voor moderne softwareontwikkeling:
+De **Primadata Development Marketplace v1.6** combineert de beste Claude Code plugins voor moderne softwareontwikkeling:
 
 - **38+ gespecialiseerde agents** voor development, testing, security, architectuur
-- **32+ skills** voor TDD, debugging, collaboration, en best practices
+- **41+ skills** voor TDD, debugging, collaboration, skill creation, en best practices
+- **6 Official Anthropic skills** voor skill development, MCP servers, testing, en document manipulation
+- **Intelligent Router** voor automatische agent/skill dispatching
 - **MCP server integraties** voor Cloudflare, Notion, Gemini, Context7
 - **Browser automation** met Chrome DevTools
 - **Episodic memory** voor context over sessies heen
@@ -210,15 +212,59 @@ Complete my-claude-code-setup features in één plugin:
 - Chrome DevTools Protocol
 - Alternative to superpowers-chrome
 
+#### 1️⃣5️⃣ **Official Anthropic Skills** (Built-in) 🆕
+Direct integration van officiële Anthropic skills:
+
+**Development Skills:**
+- `skill-creator` - Complete gids voor het maken van effectieve skills
+  - Initialization scripts (`init_skill.py`)
+  - Packaging/validation scripts
+  - Progressive disclosure patterns
+
+- `template-skill` - Basis template voor skill development
+  - YAML frontmatter examples
+  - Quick-start voor nieuwe skills
+
+- `mcp-builder` - MCP server development gids
+  - Python (FastMCP) en TypeScript (MCP SDK)
+  - Agent-centric design principles
+  - Comprehensive evaluation framework
+
+- `webapp-testing` - Playwright-based testing toolkit
+  - Server lifecycle management (`with_server.py`)
+  - Browser automation patterns
+  - UI verification
+
+**Document Skills:**
+- `document-skills/pdf` - PDF manipulation
+- `document-skills/docx` - Word document creation/editing
+- `document-skills/xlsx` - Excel spreadsheet handling
+- `document-skills/pptx` - PowerPoint presentation generation
+
+**UI Development:**
+- `artifacts-builder` - React/HTML artifacts
+  - Tailwind CSS + shadcn/ui
+  - Interactive UI components
+
+#### 1️⃣6️⃣ **Intelligent Router** (Built-in) 🆕
+Automatisch agent/skill dispatch systeem:
+- 📊 Intent detection en analyse
+- 🎯 Smart resource matching
+- ✅ Auto-loading van relevante skills
+- 🤖 Automatic agent dispatch
+- 📚 Context-aware documentation loading
+- 25+ predefined routes voor alle development scenarios
+
 ### 🎯 Totaal Overzicht
 
 | Component | Aantal |
 |-----------|--------|
 | **Plugins** | 14 |
-| **Skills** | 35+ |
+| **Skills** | 41+ |
 | **Agents** | 45+ |
 | **MCP Servers** | 5+ |
 | **Commands** | 10+ |
+| **Built-in Skills** | 6 (Anthropic) + 1 (Router) |
 
 ### 🔧 Gebruik
 
@@ -278,10 +324,12 @@ MIT License - Zie [LICENSE](LICENSE) voor details.
 
 ### 🎯 What is this?
 
-The **Primadata Development Marketplace v1.5** combines the best Claude Code plugins for modern software development:
+The **Primadata Development Marketplace v1.6** combines the best Claude Code plugins for modern software development:
 
 - **38+ specialized agents** for development, testing, security, architecture
-- **32+ skills** for TDD, debugging, collaboration, and best practices
+- **41+ skills** for TDD, debugging, collaboration, skill creation, and best practices
+- **6 Official Anthropic skills** for skill development, MCP servers, testing, and document manipulation
+- **Intelligent Router** for automatic agent/skill dispatching
 - **MCP server integrations** for Cloudflare, Notion, Gemini, Context7
 - **Browser automation** with Chrome DevTools
 - **Episodic memory** for cross-session context
@@ -356,11 +404,12 @@ See Dutch version above for complete list of all 19 plugins with agents and skil
 
 | Component | Count |
 |-----------|-------|
-| **Plugins** | 19 |
-| **Skills** | 40+ |
-| **Agents** | 50+ |
-| **Commands** | 15+ |
+| **Plugins** | 14 |
+| **Skills** | 41+ |
+| **Agents** | 45+ |
+| **Commands** | 10+ |
 | **MCP Servers** | 5+ |
+| **Built-in Skills** | 6 (Anthropic) + 1 (Router) |
 
 ### 🔧 Usage
 
@@ -449,9 +498,16 @@ This marketplace integrates and builds upon the work of many talented developers
 - **[Upstash](https://github.com/upstash)** - Context7 MCP
 - **[Chrome DevTools Team](https://github.com/ChromeDevTools)** - Chrome DevTools MCP
 
-### Special Thanks
+### Official Skills Integration
 
 - **[Anthropic](https://www.anthropic.com/)** - For creating Claude and Claude Code
+  - skill-creator, template-skill, mcp-builder, webapp-testing
+  - document-skills (pdf, docx, xlsx, pptx)
+  - artifacts-builder
+  - Source: [anthropics/skills](https://github.com/anthropics/skills)
+
+### Special Thanks
+
 - All contributors to the open-source Claude Code ecosystem
 - The Claude Code community for feedback and suggestions
 
