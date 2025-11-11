@@ -37,6 +37,7 @@ Temporary Items
 
 # Claude Code
 .claude/plugins/cache/
+.worktrees/
 
 # Logs
 logs
