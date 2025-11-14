@@ -52,7 +52,7 @@
       "triggers": ["security", "beveilig", "OWASP", "vulnerability", "audit", "XSS", "CSRF", "injection"],
       "complexity": "high",
       "plugins": [],
-      "agent": "security-specialist",
+      "agent": null,
       "skills": ["security-essentials"],
       "tools": ["Grep", "Bash"],
       "docs": ["docs/security.md"],
@@ -135,7 +135,7 @@
       "tools": ["Read", "Write", "Edit"],
       "docs": ["docs/security.md", "docs/backend.md"],
       "priority": "critical",
-      "optional_agents": ["security-specialist", "frontend-specialist"]
+      "optional_agents": ["frontend-specialist"]
     },
     "deployment": {
       "intent": "Deploy to production, CI/CD, hosting",
