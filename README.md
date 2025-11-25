@@ -89,7 +89,7 @@ claude plugin marketplace add Primadetaautomation/primadata-marketplace && \
 
 ### 📦 Wat zit erin?
 
-#### 1️⃣ **claude-dev-toolkit** (38 agents + 6 skills)
+#### 1️⃣ **claude-dev-toolkit** (38 agents + 8 skills)
 
 **Core Development Agents:**
 - `senior-fullstack-developer` - Production-ready fullstack met TDD
