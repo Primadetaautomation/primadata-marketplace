@@ -1,0 +1,31 @@
+{
+  "name": "recruitment-outreach-engine",
+  "version": "1.0.0",
+  "description": "AI-driven recruitment outreach automation engine",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "chrome-extension",
+    "console-app"
+  ],
+  "scripts": {
+    "dev": "concurrently \"pnpm --filter backend dev\" \"pnpm --filter console-app dev\"",
+    "dev:backend": "pnpm --filter backend dev",
+    "dev:frontend": "pnpm --filter console-app dev",
+    "dev:extension": "pnpm --filter chrome-extension dev",
+    "build": "pnpm -r build",
+    "clean": "pnpm -r clean && rm -rf node_modules",
+    "test": "pnpm -r test",
+    "lint": "pnpm -r lint",
+    "type-check": "pnpm -r type-check"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "concurrently": "^8.2.2",
+    "typescript": "^5.3.3"
+  },
+  "packageManager": "pnpm@8.12.0",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

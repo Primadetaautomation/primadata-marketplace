@@ -1,0 +1,36 @@
+{
+  "functions": {
+    "api/**/*.ts": {
+      "maxDuration": 30
+    }
+  },
+  "crons": [
+    {
+      "path": "/api/cron/follow-ups",
+      "schedule": "0 10,14 * * *"
+    },
+    {
+      "path": "/api/cron/enrichment",
+      "schedule": "*/30 9-17 * * 1-5"
+    },
+    {
+      "path": "/api/cron/outreach",
+      "schedule": "0 9-16 * * 1-5"
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  },
+  "build": {
+    "env": {
+      "DATABASE_URL": "@database_url",
+      "OPENAI_API_KEY": "@openai_api_key",
+      "API_KEY": "@api_key",
+      "FIRECRAWL_API_KEY": "@firecrawl_api_key",
+      "SERPER_API_KEY": "@serper_api_key",
+      "HUNTER_API_KEY": "@hunter_api_key",
+      "POSTMARK_API_KEY": "@postmark_api_key",
+      "EMAIL_FROM": "@email_from"
+    }
+  }
+}

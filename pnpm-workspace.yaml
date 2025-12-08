@@ -1,0 +1,4 @@
+packages:
+  - 'backend'
+  - 'chrome-extension'
+  - 'console-app'

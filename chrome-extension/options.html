@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recruitment Extension Options</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 100%;
+            padding: 40px;
+        }
+
+        h1 {
+            color: #1f2937;
+            margin-bottom: 8px;
+            font-size: 28px;
+        }
+
+        .subtitle {
+            color: #6b7280;
+            margin-bottom: 32px;
+            font-size: 14px;
+        }
+
+        .section {
+            margin-bottom: 32px;
+        }
+
+        .section h2 {
+            color: #374151;
+            font-size: 18px;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            color: #4b5563;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 6px;
+        }
+
+        input[type="text"],
+        input[type="url"],
+        input[type="password"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #7c3aed;
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+        }
+
+        .help-text {
+            font-size: 12px;
+            color: #9ca3af;
+            margin-top: 4px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-right: 8px;
+            cursor: pointer;
+        }
+
+        .checkbox-group label {
+            margin-bottom: 0;
+            cursor: pointer;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        button {
+            padding: 10px 24px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #7c3aed, #9333ea);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+        }
+
+        .btn-secondary {
+            background: #f3f4f6;
+            color: #6b7280;
+        }
+
+        .btn-secondary:hover {
+            background: #e5e7eb;
+        }
+
+        .btn-danger {
+            background: #ef4444;
+            color: white;
+            margin-left: auto;
+        }
+
+        .btn-danger:hover {
+            background: #dc2626;
+        }
+
+        .message {
+            padding: 12px 16px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            display: none;
+        }
+
+        .message.show {
+            display: block;
+        }
+
+        .message.success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #6ee7b7;
+        }
+
+        .message.error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fca5a5;
+        }
+
+        .stats {
+            background: #f9fafb;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .stats-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .stats-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .stats-label {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .stats-value {
+            color: #1f2937;
+            font-weight: 600;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⚙️ Extension Settings</h1>
+        <p class="subtitle">Configure your LinkedIn Recruitment Extension</p>
+
+        <div id="message" class="message"></div>
+
+        <!-- API Configuration -->
+        <div class="section">
+            <h2>API Configuration</h2>
+
+            <div class="form-group">
+                <label for="apiUrl">API URL</label>
+                <input type="url" id="apiUrl" placeholder="https://your-app.vercel.app">
+                <p class="help-text">Your Vercel deployment URL (without trailing slash)</p>
+            </div>
+
+            <div class="form-group">
+                <label for="apiKey">API Key</label>
+                <input type="password" id="apiKey" placeholder="Your secure API key">
+                <p class="help-text">Keep this secret and never share it</p>
+            </div>
+
+            <button id="testConnection" class="btn-secondary">Test Connection</button>
+        </div>
+
+        <!-- Capture Settings -->
+        <div class="section">
+            <h2>Capture Settings</h2>
+
+            <div class="checkbox-group">
+                <input type="checkbox" id="autoEnrich" checked>
+                <label for="autoEnrich">Automatically enrich profiles after capture</label>
+            </div>
+
+            <div class="checkbox-group">
+                <input type="checkbox" id="showNotifications" checked>
+                <label for="showNotifications">Show desktop notifications</label>
+            </div>
+
+            <div class="checkbox-group">
+                <input type="checkbox" id="duplicateCheck" checked>
+                <label for="duplicateCheck">Check for duplicate profiles</label>
+            </div>
+
+            <div class="form-group">
+                <label for="defaultCampaign">Default Campaign</label>
+                <select id="defaultCampaign">
+                    <option value="">Ask every time</option>
+                </select>
+                <p class="help-text">Pre-select this campaign when capturing profiles</p>
+            </div>
+        </div>
+
+        <!-- Display Settings -->
+        <div class="section">
+            <h2>Display Settings</h2>
+
+            <div class="form-group">
+                <label for="buttonPosition">Button Position</label>
+                <select id="buttonPosition">
+                    <option value="bottom-right">Bottom Right</option>
+                    <option value="bottom-left">Bottom Left</option>
+                    <option value="top-right">Top Right</option>
+                    <option value="top-left">Top Left</option>
+                </select>
+            </div>
+
+            <div class="checkbox-group">
+                <input type="checkbox" id="hideButton">
+                <label for="hideButton">Hide capture button (use extension icon only)</label>
+            </div>
+
+            <div class="form-group">
+                <label for="buttonSize">Button Size</label>
+                <input type="number" id="buttonSize" min="40" max="80" value="60">
+                <p class="help-text">Size in pixels (40-80)</p>
+            </div>
+        </div>
+
+        <!-- Statistics -->
+        <div class="section">
+            <h2>Usage Statistics</h2>
+            <div class="stats">
+                <div class="stats-row">
+                    <span class="stats-label">Profiles Captured</span>
+                    <span class="stats-value" id="statsCaptured">0</span>
+                </div>
+                <div class="stats-row">
+                    <span class="stats-label">Last Capture</span>
+                    <span class="stats-value" id="statsLastCapture">Never</span>
+                </div>
+                <div class="stats-row">
+                    <span class="stats-label">Active Campaigns</span>
+                    <span class="stats-value" id="statsActiveCampaigns">0</span>
+                </div>
+                <div class="stats-row">
+                    <span class="stats-label">Extension Version</span>
+                    <span class="stats-value">1.0.0</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="button-group">
+            <button id="saveOptions" class="btn-primary">Save Settings</button>
+            <button id="restoreDefaults" class="btn-secondary">Restore Defaults</button>
+            <button id="clearData" class="btn-danger">Clear All Data</button>
+        </div>
+    </div>
+
+    <script src="options.js"></script>
+</body>
+</html>

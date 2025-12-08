@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recruitment Outreach Engine</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 350px;
+      min-height: 400px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    .container {
+      padding: 20px;
+    }
+
+    .header {
+      text-align: center;
+      color: white;
+      margin-bottom: 20px;
+    }
+
+    .header h1 {
+      font-size: 18px;
+      margin-bottom: 5px;
+    }
+
+    .header p {
+      font-size: 12px;
+      opacity: 0.9;
+    }
+
+    .status-card {
+      background: white;
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 15px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .status-card h2 {
+      font-size: 14px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .status-indicator {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #10b981;
+      animation: pulse 2s infinite;
+    }
+
+    .status-dot.inactive {
+      background: #6b7280;
+      animation: none;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.5;
+      }
+    }
+
+    .stats {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 24px;
+      font-weight: bold;
+      color: #667eea;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: #6b7280;
+      margin-top: 2px;
+    }
+
+    .actions {
+      background: white;
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 15px;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-bottom: 10px;
+    }
+
+    .btn:last-child {
+      margin-bottom: 0;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    }
+
+    .btn-secondary {
+      background: #f3f4f6;
+      color: #4b5563;
+    }
+
+    .btn-secondary:hover {
+      background: #e5e7eb;
+    }
+
+    .history {
+      background: white;
+      border-radius: 12px;
+      padding: 15px;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+
+    .history h2 {
+      font-size: 14px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .history-item {
+      padding: 8px 0;
+      border-bottom: 1px solid #f3f4f6;
+      font-size: 12px;
+    }
+
+    .history-item:last-child {
+      border-bottom: none;
+    }
+
+    .history-item a {
+      color: #667eea;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .history-item a:hover {
+      text-decoration: underline;
+    }
+
+    .history-item .meta {
+      color: #9ca3af;
+      font-size: 11px;
+      margin-top: 2px;
+    }
+
+    .empty-state {
+      text-align: center;
+      color: #9ca3af;
+      padding: 20px 0;
+    }
+
+    .settings-link {
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    .settings-link a {
+      color: white;
+      text-decoration: none;
+      font-size: 13px;
+      opacity: 0.9;
+    }
+
+    .settings-link a:hover {
+      opacity: 1;
+      text-decoration: underline;
+    }
+
+    .batch-description {
+      font-size: 12px;
+      color: #6b7280;
+      margin-bottom: 10px;
+    }
+
+    .batch-stats {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .progress-container {
+      margin-top: 12px;
+    }
+
+    .progress-bar {
+      height: 8px;
+      background: #e5e7eb;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    .progress-text {
+      text-align: center;
+      font-size: 12px;
+      color: #6b7280;
+      margin-top: 6px;
+    }
+
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .btn-success {
+      background: #10b981;
+      color: white;
+    }
+
+    .btn-success:hover {
+      background: #059669;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Recruitment Outreach Engine</h1>
+      <p id="connection-status">Checking connection...</p>
+    </div>
+
+    <div class="status-card">
+      <h2>Status</h2>
+      <div class="status-indicator">
+        <div class="status-dot" id="status-dot"></div>
+        <span id="status-text">Ready to capture profiles</span>
+      </div>
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-value" id="captured-today">0</div>
+          <div class="stat-label">Today</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value" id="captured-week">0</div>
+          <div class="stat-label">This Week</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value" id="captured-total">0</div>
+          <div class="stat-label">Total</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-primary" id="capture-btn">
+        Capture Current Profile
+      </button>
+      <button class="btn btn-secondary" id="dashboard-btn">
+        Open Dashboard
+      </button>
+    </div>
+
+    <div class="status-card" id="batch-enrich-section">
+      <h2>Batch Enrichment</h2>
+      <p class="batch-description">Re-enrich existing candidates with latest LinkedIn data</p>
+      <div class="batch-stats">
+        <div class="stat">
+          <div class="stat-value" id="enrichable-count">-</div>
+          <div class="stat-label">Enrichable</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value" id="total-linkedin">-</div>
+          <div class="stat-label">With LinkedIn</div>
+        </div>
+      </div>
+      <button class="btn btn-primary" id="batch-enrich-btn" disabled>
+        Start Batch Enrichment
+      </button>
+      <div class="progress-container" id="progress-container" style="display: none;">
+        <div class="progress-bar">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+        <div class="progress-text" id="progress-text">0 / 0</div>
+      </div>
+    </div>
+
+    <div class="history">
+      <h2>Recent Captures</h2>
+      <div id="history-list">
+        <div class="empty-state">No profiles captured yet</div>
+      </div>
+    </div>
+
+    <div class="settings-link">
+      <a href="#" id="settings-link">Settings</a>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
