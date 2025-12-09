@@ -12,7 +12,10 @@ import {
   Calendar,
   Star,
   AlertCircle,
-  CheckCircle
+  CheckCircle,
+  Linkedin,
+  CheckSquare,
+  Square
 } from 'lucide-react';
 import api from '@/lib/api';
 import { cn, formatDate, getStatusColor, getScoreColor, getInitials } from '@/lib/utils';
@@ -37,6 +40,9 @@ export default function Candidates() {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
   const [enrichmentFilter, setEnrichmentFilter] = useState('all');
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+  const [isEnriching, setIsEnriching] = useState(false);
+  const [enrichProgress, setEnrichProgress] = useState({ current: 0, total: 0 });
 
   // Fetch candidates
   const { data: candidates, isLoading, refetch } = useQuery<Candidate[]>({
@@ -62,6 +68,67 @@ export default function Candidates() {
     } catch (error) {
       console.error('Failed to enrich candidate:', error);
     }
+  };
+
+  // Selection handlers
+  const toggleSelection = (id: string, e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setSelectedIds(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(id)) {
+        newSet.delete(id);
+      } else {
+        newSet.add(id);
+      }
+      return newSet;
+    });
+  };
+
+  const selectAll = () => {
+    if (filteredCandidates.length === selectedIds.size) {
+      setSelectedIds(new Set());
+    } else {
+      setSelectedIds(new Set(filteredCandidates.map(c => c.id)));
+    }
+  };
+
+  const selectWithLinkedIn = () => {
+    setSelectedIds(new Set(filteredCandidates.filter(c => c.linkedinUrl).map(c => c.id)));
+  };
+
+  const selectUnenriched = () => {
+    setSelectedIds(new Set(
+      filteredCandidates
+        .filter(c => c.linkedinUrl && c.enrichmentStatus !== 'completed')
+        .map(c => c.id)
+    ));
+  };
+
+  // Batch enrichment - opens LinkedIn profiles for selected candidates
+  const handleBatchEnrich = async () => {
+    const selectedCandidates = filteredCandidates.filter(c => selectedIds.has(c.id) && c.linkedinUrl);
+
+    if (selectedCandidates.length === 0) {
+      alert('No selected candidates with LinkedIn URLs');
+      return;
+    }
+
+    setIsEnriching(true);
+    setEnrichProgress({ current: 0, total: selectedCandidates.length });
+
+    // Open LinkedIn URLs in new tabs (user needs Chrome extension to capture)
+    for (let i = 0; i < selectedCandidates.length; i++) {
+      const candidate = selectedCandidates[i];
+      window.open(candidate.linkedinUrl, '_blank');
+      setEnrichProgress({ current: i + 1, total: selectedCandidates.length });
+      // Small delay between opening tabs
+      await new Promise(r => setTimeout(r, 500));
+    }
+
+    setIsEnriching(false);
+    setSelectedIds(new Set());
+    alert(`Opened ${selectedCandidates.length} LinkedIn profiles. Use the Chrome extension to capture them.`);
   };
 
   const statusOptions = [
@@ -102,15 +169,59 @@ export default function Candidates() {
             <h1 className="text-2xl font-bold text-gray-900">Candidates</h1>
             <p className="text-gray-500 mt-1">Manage and track your recruitment pipeline</p>
           </div>
-          <button
-            onClick={() => refetch()}
-            className="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
-          >
-            <RefreshCw className="h-4 w-4" />
-            Refresh
-          </button>
+          <div className="flex items-center gap-3">
+            {selectedIds.size > 0 && (
+              <button
+                onClick={handleBatchEnrich}
+                disabled={isEnriching}
+                className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
+              >
+                <Linkedin className="h-4 w-4" />
+                {isEnriching
+                  ? `Opening... ${enrichProgress.current}/${enrichProgress.total}`
+                  : `Enrich ${selectedIds.size} Selected`
+                }
+              </button>
+            )}
+            <button
+              onClick={() => refetch()}
+              className="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
+            >
+              <RefreshCw className="h-4 w-4" />
+              Refresh
+            </button>
+          </div>
         </div>
       </div>
+
+      {/* Selection Bar */}
+      {filteredCandidates.length > 0 && (
+        <div className="bg-purple-50 rounded-lg p-3 mb-4 flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <button
+              onClick={selectAll}
+              className="text-sm text-purple-700 hover:text-purple-900 font-medium"
+            >
+              {selectedIds.size === filteredCandidates.length ? 'Deselect All' : 'Select All'}
+            </button>
+            <button
+              onClick={selectWithLinkedIn}
+              className="text-sm text-purple-700 hover:text-purple-900 font-medium"
+            >
+              Select with LinkedIn
+            </button>
+            <button
+              onClick={selectUnenriched}
+              className="text-sm text-purple-700 hover:text-purple-900 font-medium"
+            >
+              Select Unenriched
+            </button>
+          </div>
+          <span className="text-sm text-purple-600">
+            {selectedIds.size} of {filteredCandidates.length} selected
+          </span>
+        </div>
+      )}
 
       {/* Filters */}
       <div className="bg-white shadow rounded-lg p-4 mb-6">
@@ -170,6 +281,18 @@ export default function Candidates() {
                 <div className="px-6 py-4">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-4">
+                      {/* Checkbox */}
+                      <button
+                        onClick={(e) => toggleSelection(candidate.id, e)}
+                        className="flex-shrink-0 p-1 rounded hover:bg-gray-100"
+                      >
+                        {selectedIds.has(candidate.id) ? (
+                          <CheckSquare className="h-5 w-5 text-purple-600" />
+                        ) : (
+                          <Square className="h-5 w-5 text-gray-400" />
+                        )}
+                      </button>
+
                       {/* Avatar */}
                       <div className="flex-shrink-0">
                         <div className="h-10 w-10 rounded-full bg-purple-100 flex items-center justify-center">
@@ -214,6 +337,11 @@ export default function Candidates() {
 
                     {/* Actions & Status */}
                     <div className="flex items-center gap-4">
+                      {/* LinkedIn indicator */}
+                      {candidate.linkedinUrl && (
+                        <Linkedin className="h-4 w-4 text-blue-500" />
+                      )}
+
                       {/* Status Badge */}
                       <span className={cn(
                         'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium',

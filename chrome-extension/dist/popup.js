@@ -1,16 +1,23 @@
 // Popup script for Chrome Extension
+let candidatesData = []; // Store loaded candidates
+
 document.addEventListener('DOMContentLoaded', async () => {
   // Load current status
   await loadStatus();
   await loadHistory();
   await checkConnection();
-  await loadEnrichableCount();
+  await loadCandidateList();
 
   // Add event listeners
   document.getElementById('capture-btn').addEventListener('click', captureCurrentProfile);
   document.getElementById('dashboard-btn').addEventListener('click', openDashboard);
   document.getElementById('settings-link').addEventListener('click', openSettings);
   document.getElementById('batch-enrich-btn').addEventListener('click', startBatchEnrichment);
+
+  // Selection buttons
+  document.getElementById('select-all-btn').addEventListener('click', selectAll);
+  document.getElementById('select-none-btn').addEventListener('click', selectNone);
+  document.getElementById('select-unenriched-btn').addEventListener('click', selectUnenriched);
 });
 
 // Load extension status
@@ -182,14 +189,15 @@ function formatTime(timestamp) {
   return date.toLocaleDateString();
 }
 
-// Load count of enrichable candidates
-async function loadEnrichableCount() {
+// Load candidate list with checkboxes
+async function loadCandidateList() {
+  const listEl = document.getElementById('candidate-list');
+
   try {
     const { apiUrl, apiKey } = await chrome.storage.sync.get(['apiUrl', 'apiKey']);
 
     if (!apiUrl || !apiKey) {
-      document.getElementById('enrichable-count').textContent = '-';
-      document.getElementById('total-linkedin').textContent = '-';
+      listEl.innerHTML = '<div class="empty-state">Configure API settings first</div>';
       return;
     }
 
@@ -201,23 +209,75 @@ async function loadEnrichableCount() {
     });
 
     if (!response.ok) {
-      console.error('Failed to fetch enrichable count');
+      listEl.innerHTML = '<div class="empty-state">Failed to load candidates</div>';
       return;
     }
 
     const data = await response.json();
-    document.getElementById('enrichable-count').textContent = data.enrichable || 0;
-    document.getElementById('total-linkedin').textContent = data.total || 0;
+    candidatesData = data.candidates || [];
 
-    // Enable button if there are candidates to enrich
-    const btn = document.getElementById('batch-enrich-btn');
-    if (data.enrichable > 0) {
-      btn.disabled = false;
+    if (candidatesData.length === 0) {
+      listEl.innerHTML = '<div class="empty-state">No candidates with LinkedIn URLs</div>';
+      return;
     }
 
+    // Render candidate list
+    listEl.innerHTML = candidatesData.map(c => `
+      <label class="candidate-item">
+        <input type="checkbox" value="${c.id}" data-linkedin="${c.linkedin_url}" ${c.needs_enrichment ? 'data-needs-enrichment="true"' : ''}>
+        <div class="candidate-info">
+          <div class="candidate-name">${c.naam}</div>
+          <div class="candidate-meta">${c.linkedin_url.replace('https://www.linkedin.com/in/', '').replace('/', '')}</div>
+        </div>
+        <span class="candidate-status ${c.needs_enrichment ? 'needs-enrichment' : 'enriched'}">
+          ${c.needs_enrichment ? 'Needs update' : 'Enriched'}
+        </span>
+      </label>
+    `).join('');
+
+    // Add change listeners to all checkboxes
+    listEl.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+      cb.addEventListener('change', updateSelectedCount);
+    });
+
+    updateSelectedCount();
+
   } catch (error) {
-    console.error('Error loading enrichable count:', error);
+    console.error('Error loading candidates:', error);
+    listEl.innerHTML = '<div class="empty-state">Error loading candidates</div>';
   }
+}
+
+// Update selected count and button state
+function updateSelectedCount() {
+  const checkboxes = document.querySelectorAll('#candidate-list input[type="checkbox"]:checked');
+  const count = checkboxes.length;
+  document.getElementById('selected-count').textContent = `${count} selected`;
+  document.getElementById('batch-enrich-btn').disabled = count === 0;
+}
+
+// Select all candidates
+function selectAll() {
+  document.querySelectorAll('#candidate-list input[type="checkbox"]').forEach(cb => {
+    cb.checked = true;
+  });
+  updateSelectedCount();
+}
+
+// Select none
+function selectNone() {
+  document.querySelectorAll('#candidate-list input[type="checkbox"]').forEach(cb => {
+    cb.checked = false;
+  });
+  updateSelectedCount();
+}
+
+// Select only unenriched candidates
+function selectUnenriched() {
+  document.querySelectorAll('#candidate-list input[type="checkbox"]').forEach(cb => {
+    cb.checked = cb.dataset.needsEnrichment === 'true';
+  });
+  updateSelectedCount();
 }
 
 // Start batch enrichment process
@@ -235,35 +295,21 @@ async function startBatchEnrichment() {
       return;
     }
 
-    // Disable button and show progress
-    btn.disabled = true;
-    btn.textContent = 'Fetching candidates...';
-    progressContainer.style.display = 'block';
+    // Get selected candidates from checkboxes
+    const selectedCheckboxes = document.querySelectorAll('#candidate-list input[type="checkbox"]:checked');
+    const selectedIds = Array.from(selectedCheckboxes).map(cb => cb.value);
 
-    // Get candidates with LinkedIn URLs
-    const response = await fetch(`${apiUrl}/api/linkedin/enrich-batch`, {
-      headers: {
-        'x-api-key': apiKey,
-        'Content-Type': 'application/json'
-      }
-    });
-
-    if (!response.ok) {
-      throw new Error('Failed to fetch candidates');
-    }
-
-    const data = await response.json();
-    const candidates = data.candidates.filter(c => c.needs_enrichment);
-
-    if (candidates.length === 0) {
-      alert('No candidates need enrichment');
-      btn.disabled = false;
-      btn.textContent = 'Start Batch Enrichment';
-      progressContainer.style.display = 'none';
+    if (selectedIds.length === 0) {
+      alert('Please select at least one candidate');
       return;
     }
 
-    // Request the batch queue
+    // Disable button and show progress
+    btn.disabled = true;
+    btn.textContent = 'Preparing...';
+    progressContainer.style.display = 'block';
+
+    // Request the batch queue with selected IDs
     const queueResponse = await fetch(`${apiUrl}/api/linkedin/enrich-batch`, {
       method: 'POST',
       headers: {
@@ -271,7 +317,7 @@ async function startBatchEnrichment() {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        kandidaat_ids: candidates.map(c => c.id)
+        kandidaat_ids: selectedIds
       })
     });
 
@@ -281,6 +327,10 @@ async function startBatchEnrichment() {
 
     const queueData = await queueResponse.json();
     const profiles = queueData.profiles;
+
+    if (!profiles || profiles.length === 0) {
+      throw new Error('No profiles to enrich');
+    }
 
     btn.textContent = 'Enriching...';
     progressText.textContent = `0 / ${profiles.length}`;
@@ -326,12 +376,11 @@ async function startBatchEnrichment() {
     btn.textContent = `Done! ${enriched} enriched`;
     btn.className = 'btn btn-success';
 
-    // Reload counts after 2 seconds
+    // Reload candidate list after 2 seconds
     setTimeout(async () => {
-      await loadEnrichableCount();
-      btn.textContent = 'Start Batch Enrichment';
+      await loadCandidateList();
+      btn.textContent = 'Enrich Selected';
       btn.className = 'btn btn-primary';
-      btn.disabled = false;
       progressContainer.style.display = 'none';
       progressFill.style.width = '0%';
     }, 2000);
@@ -340,7 +389,7 @@ async function startBatchEnrichment() {
     console.error('Batch enrichment error:', error);
     alert('Error during batch enrichment: ' + error.message);
     btn.disabled = false;
-    btn.textContent = 'Start Batch Enrichment';
+    btn.textContent = 'Enrich Selected';
     progressContainer.style.display = 'none';
   }
 }

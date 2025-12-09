@@ -261,6 +261,104 @@
     .btn-success:hover {
       background: #059669;
     }
+
+    .candidate-list {
+      max-height: 200px;
+      overflow-y: auto;
+      margin-bottom: 12px;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+    }
+
+    .candidate-item {
+      display: flex;
+      align-items: center;
+      padding: 8px 12px;
+      border-bottom: 1px solid #f3f4f6;
+      font-size: 12px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .candidate-item:hover {
+      background: #f9fafb;
+    }
+
+    .candidate-item:last-child {
+      border-bottom: none;
+    }
+
+    .candidate-item input[type="checkbox"] {
+      margin-right: 10px;
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
+
+    .candidate-info {
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .candidate-name {
+      font-weight: 600;
+      color: #333;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .candidate-meta {
+      color: #9ca3af;
+      font-size: 11px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .candidate-status {
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-left: 8px;
+    }
+
+    .candidate-status.needs-enrichment {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .candidate-status.enriched {
+      background: #d1fae5;
+      color: #065f46;
+    }
+
+    .select-actions {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .select-actions button {
+      flex: 1;
+      padding: 6px;
+      font-size: 11px;
+      border: 1px solid #e5e7eb;
+      background: white;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .select-actions button:hover {
+      background: #f3f4f6;
+    }
+
+    .selected-count {
+      text-align: center;
+      font-size: 12px;
+      color: #6b7280;
+      margin-bottom: 8px;
+    }
   </style>
 </head>
 <body>
@@ -303,19 +401,22 @@
 
     <div class="status-card" id="batch-enrich-section">
       <h2>Batch Enrichment</h2>
-      <p class="batch-description">Re-enrich existing candidates with latest LinkedIn data</p>
-      <div class="batch-stats">
-        <div class="stat">
-          <div class="stat-value" id="enrichable-count">-</div>
-          <div class="stat-label">Enrichable</div>
-        </div>
-        <div class="stat">
-          <div class="stat-value" id="total-linkedin">-</div>
-          <div class="stat-label">With LinkedIn</div>
-        </div>
+      <p class="batch-description">Select candidates to enrich with LinkedIn data</p>
+
+      <div class="select-actions">
+        <button id="select-all-btn">Select All</button>
+        <button id="select-none-btn">Select None</button>
+        <button id="select-unenriched-btn">Unenriched Only</button>
       </div>
+
+      <div class="candidate-list" id="candidate-list">
+        <div class="empty-state">Loading candidates...</div>
+      </div>
+
+      <div class="selected-count" id="selected-count">0 selected</div>
+
       <button class="btn btn-primary" id="batch-enrich-btn" disabled>
-        Start Batch Enrichment
+        Enrich Selected
       </button>
       <div class="progress-container" id="progress-container" style="display: none;">
         <div class="progress-bar">
