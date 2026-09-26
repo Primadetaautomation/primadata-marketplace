@@ -95,7 +95,7 @@ Herkenbare zinnen:
 - **Efficiente samenwerking met Claude voor foutloze code delivery**.
 - **BM-1 (MUST)** Claude mag geen functionaliteit verzinnen, weglaten of overslaan.
 - **BM-2 (MUST)** Claude volgt altijd de exacte vraag/opdracht van de gebruiker.
-- **BM-3 (MUST)** Indien iets onduidelijk is -> altijd vragen stellen, nooit aannames doen.
+- **BM-3 (MUST)** Indien iets onduidelijk is -> kies bij een laag-risico, omkeerbare keuze de aanbevolen optie, noem de aanname en ga door. Vraag alleen bij een echte blokkade (sudo/wachtwoord/token/betaling, productie-uitrol, onomkeerbare actie, serverfout, besluit dat bij de opdrachtgever ligt). Feiten (schema, bestanden, referenties) altijd verifieren, nooit gokken.
 
 ---
 
@@ -270,8 +270,8 @@ Als je een van deze zinnen gebruikt, STOP en verificeer:
 
 ## 1 - Planning & Communicatie
 
-- **P-1 (MUST)** Stel minimaal 3 clarifying questions voor coding.
-- **P-2 (MUST)** Maak een step-by-step plan en vraag expliciet om akkoord.
+- **P-1 (MUST)** Is de opdracht duidelijk of is er een bouwplan/werkpakket/decision log: bouw door tot af, zonder tussenvragen of keuzemenu's. Kies bij een laag-risico, omkeerbare keuze de aanbevolen optie, noem de aanname en ga door; vraag alleen bij een echte blokkade.
+- **P-2 (MUST)** Maak een step-by-step plan en voer het uit. Vraag expliciet om akkoord alleen voor productie-uitrol of onomkeerbare acties.
 - **P-3 (MUST)** Bij meerdere opties: comparison table met pros/cons.
 - **P-4 (MUST)** Definieer acceptance criteria.
 - **P-5 (SHOULD)** Geef complexity level (Simple/Medium/Complex).
@@ -286,7 +286,7 @@ Als je een van deze zinnen gebruikt, STOP en verificeer:
 - **IA-4 (MUST)** Run bestaande tests VOOR wijzigingen om baseline te bepalen.
 - **IA-5 (MUST)** Bij overwriting: backup/documenteer originele implementatie.
 - **IA-6 (MUST NOT)** Nooit code overschrijven zonder impact check.
-- **IA-7 (MUST)** Bij twijfel: vraag expliciet "Mag ik X overschrijven? Dit heeft impact op Y"
+- **IA-7 (MUST)** Omkeerbare overschrijving (code in git): noem de impact ("X overschrijven raakt Y") en ga door. Onomkeerbare overschrijving (data, bestanden buiten git): vraag expliciet "Mag ik X overschrijven? Dit heeft impact op Y"
 
 ---
 
@@ -387,7 +387,7 @@ npm test     # Verify clean baseline
 **Cleanup na feature:**
 ```bash
 git worktree remove .worktrees/<branch-name>
-git branch -D <branch-name>  # Optioneel
+git branch -d <branch-name>  # Optioneel; alleen eigen, gemergde tak. -D (ongemergde commits weg) alleen met akkoord
 ```
 
 ---
@@ -452,7 +452,7 @@ Claude analyseert automatisch:
 
 ### Strikte Opdracht Uitvoering
 - **CL-12 (MUST)** Geen eigen interpretatie - volg exacte instructies.
-- **CL-13 (MUST)** Bij onduidelijkheid: stop en vraag, niet overslaan.
+- **CL-13 (MUST)** Bij onduidelijkheid: niet overslaan. Kies bij een laag-risico, omkeerbare keuze de aanbevolen optie, noem de aanname en ga door; stop en vraag alleen bij een echte blokkade of als de opdrachtgever expliciet "stop" zegt.
 - **CL-14 (MUST)** Geen auto-activatie/deactivatie zonder expliciete vraag.
 
 ---
